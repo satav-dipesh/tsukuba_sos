@@ -32,7 +32,8 @@ with st.sidebar:
 
 endpoint = endpoint_data[modelname]
     
-api_key=os.environ.get('API_KEY')
+# api_key=os.environ.get('API_KEY')
+api_key = st.secrets["openai_apikey"]
 
 if not api_key:
     st.info("Please add your OpenAI API key to continue.")
