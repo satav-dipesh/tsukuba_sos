@@ -1,0 +1,17 @@
+{
+    "Meta-Llama-3.1-70B-Instruct": "https://inference-api.cloud.denvrdata.com/Meta-Llama-3.1-70B-Instruct/v1/",
+    "Meta-Llama-3.1-8B-Instruct": "https://inference-api.cloud.denvrdata.com/Meta-Llama-3.1-8B-Instruct/v1/",
+    "CodeLlama-34b-Instruct-hf": "https://inference-api.cloud.denvrdata.com/CodeLlama-34b-Instruct/v1/",
+    "Mistral-7B-Instruct-v0.3": "https://inference-api.cloud.denvrdata.com/Mistral-7B-Instruct/v1/",
+    "Mixtral-8x7B-Instruct-v0.1": "https://inference-api.cloud.denvrdata.com/Mixtral-7B-Instruct/v1/",
+    "DENVR: tiiuae/Falcon3-7B-Instruct": "https://inference-api.cloud.denvrdata.com/Falcon3-7B-Instruct/v1/",
+    "DENVR: meta-Llama-3.3-70B-Instruct": "https://inference-api.cloud.denvrdata.com/Llama-3.3-70B-Instruct/v1/",
+    "DENVR: meta-llama/Meta-Llama-3.1-70B-Instruct": "https://inference-api.cloud.denvrdata.com/Meta-Llama-3.1-70B-Instruct/v1/",
+    "DENVR: meta-llama/Meta-Llama-3.1-8B-Instruct": "https://inference-api.cloud.denvrdata.com/Meta-Llama-3.1-8B-Instruct/v1/",
+    "DENVR: codellama/CodeLlama-34b-Instruct-hf": "https://inference-api.cloud.denvrdata.com/CodeLlama-34b-Instruct/v1/",
+    "DENVR: mistralai/Mistral-7B-Instruct-v0.3": "https://inference-api.cloud.denvrdata.com/Mistral-7B-Instruct/v1/",
+    "DENVR: mistralai/Mixtral-8x7B-Instruct-v0.1": "https://inference-api.cloud.denvrdata.com/Mixtral-7B-Instruct/v1/",
+    "DENVR: tiiuae/Falcon3-7B-Instruct": "https://inference-api.cloud.denvrdata.com/Falcon3-7B-Instruct/v1/",
+    "DENVR: deepseek-ai/DeepSeek-R1-Distill-Llama-8B": "https://inference-api.cloud.denvrdata.com/DeepSeek-R1-Distill-Llama-8B/v1/",
+    "DENVR: deepseek-ai/DeepSeek-R1-Distill-Llama-70B": "https://inference-api.cloud.denvrdata.com/DeepSeek-R1-Distill-Llama-70B/v1"
+}
