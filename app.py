@@ -11,7 +11,8 @@ endpoint_data = json.load(open(f"{working_dir}/model_info.json"))
 def clear_chat():
     st.session_state.messages = []
 
-st.title("Intel® AI for Enterprise Inference \n Chatbot")
+st.title("Intel® AI for Enterprise Inference")
+st.header("LLM chatbot")
 
 # Extract the keys (model names) from the JSON data
 model_names = list(endpoint_data.keys())
@@ -22,7 +23,8 @@ with st.sidebar:
     st.write(f"You selected: {modelname}")
     st.button("Start New Chat", on_click=clear_chat)
     try:
-        st.session_state.api_key = st.secrets["openai_apikey2"]
+        #if you can provide the API key in the HF settings under "Variables and secrets", you will not need to enter your OpenAI-compatible API key every time.
+        st.session_state.api_key = st.secrets["openai_apikey"]
     except KeyError:
     # Add a text input for the API key if not in session state
         api_key = st.text_input("Enter your API Key", type="password")
