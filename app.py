@@ -16,6 +16,8 @@ st.title("Intel® AI for Enterprise Inference \n Chatbot")
 # Extract the keys (model names) from the JSON data
 model_names = list(endpoint_data.keys())
 
+st.session_state.api_key = st.secrets["openai_apikey"]
+
 with st.sidebar:
     modelname = st.selectbox("Select a LLM model (Running on Intel® Gaudi®) ", model_names)
     st.write(f"You selected: {modelname}")
