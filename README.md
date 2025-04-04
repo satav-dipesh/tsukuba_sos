@@ -8,7 +8,7 @@ sdk_version: 1.42.2
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: 'LLMs on Denvr Dataworks and Intel Gaudi'
+short_description: 'LLM Chatbot on Denvr Dataworks and Intel Gaudi'
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
