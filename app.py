@@ -66,7 +66,7 @@ else:
                             {"role": m["role"], "content": m["content"]}
                             for m in st.session_state.messages
                         ],
-                        max_tokens=1024,
+                        max_tokens=4096,
                         stream=True,
                     )
                     response = st.write_stream(stream)
