@@ -25,11 +25,15 @@ with st.sidebar:
     base_url = st.session_state.base_url = os.environ.get("base_url")
     client = OpenAI(api_key=api_key, base_url=base_url)
     models = client.models.list()
-    model_names = [model.id for model in models]  # Extract 'id' from each model object
+    model_names = sorted([model.id for model in models])  # Extract 'id' from each model object
+    # Specify the default model name
+    default_model_name = "meta-llama/Llama-3.3-70B-Instruct"  # Replace with your desired default model name
+    
     
     # Use st.session_state to persist the selected model
     if "selected_model" not in st.session_state:
-        st.session_state.selected_model = model_names[0]  # Default to the first model
+        # st.session_state.selected_model = model_names[0]  # Default to the first model
+        st.session_state.selected_model = default_model_name if default_model_name in model_names else model_names[0]
 
     modelname = st.selectbox(
         "Select LLM model (Running on Intel® Gaudi®) on Denvr Dataworks",
