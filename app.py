@@ -15,68 +15,52 @@ st.title("Intel® AI for Enterprise Inference")
 st.header("LLM chatbot")
 
 # Extract the keys (model names) from the JSON data
-model_names = list(endpoint_data.keys())
+# model_names = list(endpoint_data.keys())
 
 
 with st.sidebar:
-    modelname = st.selectbox("Select a LLM model (Running on Intel® Gaudi®) ", model_names)
+    #Enter openai_api key under "Secrets " in HF settings
+    #Enter base_url under "Variables" in HF settings
+    api_key = st.session_state.api_key = st.secrets["openai_apikey"]
+    base_url = st.session_state.base_url = os.environ.get("base_url")
+    client = OpenAI(api_key=api_key, base_url=base_url)
+    model_names = client.models.list()
+    
+    modelname = st.selectbox("Select LLM model (Running on Intel® Gaudi®) ", model_names)
     st.write(f"You selected: {modelname}")
     st.button("Start New Chat", on_click=clear_chat)
-    try:
-        #if you can provide the API key in the HF settings under "Variables and secrets", you will not need to enter your OpenAI-compatible API key every time.
-        st.session_state.api_key = st.secrets["openai_apikey"]
-        st.session_state.base_url = os.environ.get("base_url")
-    except KeyError:
-    # Add a text input for the API key if not in session state
-        api_key = st.text_input("Enter your API Key", type="password")
-        if api_key:
-            st.session_state.api_key = api_key    
+    
+try:
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-# Check if the API key is provided
-if "api_key" not in st.session_state or not st.session_state.api_key:
-    st.error("Please enter your API Key in the sidebar.")
-else:
-    try:
-        # endpoint = endpoint_data[modelname]
-        api_key = st.session_state.api_key
-        base_url = st.session_state.base_url
-        # base_url = endpoint
-        client = OpenAI(api_key=api_key, base_url=base_url)
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-        # Extract the model name
-        models = client.models.list()
-        modelname = models.data[0].id
+    if prompt := st.chat_input("What is up?"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
+        with st.chat_message("assistant"):
+            try:
+                stream = client.chat.completions.create(
+                    model=modelname,
+                    messages=[
+                        {"role": m["role"], "content": m["content"]}
+                        for m in st.session_state.messages
+                    ],
+                    max_tokens=4096,
+                    stream=True,
+                )
+                response = st.write_stream(stream)
+            except Exception as e:
+                st.error(f"An error occurred while generating the response: {e}")
+                response = "An error occurred while generating the response."
 
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-
-        if prompt := st.chat_input("What is up?"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
-
-            with st.chat_message("assistant"):
-                try:
-                    stream = client.chat.completions.create(
-                        model=modelname,
-                        messages=[
-                            {"role": m["role"], "content": m["content"]}
-                            for m in st.session_state.messages
-                        ],
-                        max_tokens=4096,
-                        stream=True,
-                    )
-                    response = st.write_stream(stream)
-                except Exception as e:
-                    st.error(f"An error occurred while generating the response: {e}")
-                    response = "An error occurred while generating the response."
-
-            st.session_state.messages.append({"role": "assistant", "content": response})
-    except KeyError as e:
-        st.error(f"Key error: {e}")
-    except Exception as e:
-        st.error(f"An unexpected error occurred: {e}")
+        st.session_state.messages.append({"role": "assistant", "content": response})
+except KeyError as e:
+    st.error(f"Key error: {e}")
+except Exception as e:
+    st.error(f"An unexpected error occurred: {e}")
