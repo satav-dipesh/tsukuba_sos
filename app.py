@@ -32,6 +32,15 @@ with st.sidebar:
     st.write(f"You selected: {modelname}")
     st.button("Start New Chat", on_click=clear_chat)
     
+    st.markdown("---")  # Add a horizontal line for separation
+    st.markdown(
+        """
+        **Check the latest models hosted on [Denvr Dataworks](https://www.denvrdata.com/intel), and get your own OpenAI-compatible API key.**
+
+        **Come and chat with other AI developers on [Intel’s DevHub Discord server](https://discord.gg/kfJ3NKEw5t).**
+        """
+    )
+    
 try:
     if "messages" not in st.session_state:
         st.session_state.messages = []
