@@ -23,11 +23,11 @@ with st.sidebar:
     if "selected_model" not in st.session_state:
         st.session_state.selected_model = default_model_name if default_model_name in model_names else model_names[0]
 
+    # Create the selectbox without the `index` parameter
     modelname = st.selectbox(
         "Select an LLM model (Running on Intel® Gaudi®). Hosted on Denvr Dataworks",
         model_names,
-        index=model_names.index(st.session_state.selected_model) if st.session_state.selected_model in model_names else 0,
-        key="selected_model",
+        key="selected_model",  # This ties the widget to st.session_state["selected_model"]
     )
     st.write(f"You selected: {modelname}")
     st.button("Start New Chat", on_click=clear_chat)
