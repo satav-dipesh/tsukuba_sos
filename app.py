@@ -27,7 +27,16 @@ with st.sidebar:
     models = client.models.list()
     model_names = [model.id for model in models]  # Extract 'id' from each model object
     
-    modelname = st.selectbox("Select LLM model (Running on Intel® Gaudi®) on Denvr Dataworks", model_names)
+    # Use st.session_state to persist the selected model
+    if "selected_model" not in st.session_state:
+        st.session_state.selected_model = model_names[0]  # Default to the first model
+
+    modelname = st.selectbox(
+        "Select LLM model (Running on Intel® Gaudi®) on Denvr Dataworks",
+        model_names,
+        index=model_names.index(st.session_state.selected_model) if st.session_state.selected_model in model_names else 0,
+        key="selected_model",
+    )
     st.write(f"You selected: {modelname}")
     st.button("Start New Chat", on_click=clear_chat)
     
