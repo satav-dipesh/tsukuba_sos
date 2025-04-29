@@ -25,6 +25,7 @@ with st.sidebar:
     try:
         #if you can provide the API key in the HF settings under "Variables and secrets", you will not need to enter your OpenAI-compatible API key every time.
         st.session_state.api_key = st.secrets["openai_apikey"]
+        st.session_state.base_url = os.environ.get("base_url")
     except KeyError:
     # Add a text input for the API key if not in session state
         api_key = st.text_input("Enter your API Key", type="password")
@@ -36,10 +37,10 @@ if "api_key" not in st.session_state or not st.session_state.api_key:
     st.error("Please enter your API Key in the sidebar.")
 else:
     try:
-        endpoint = endpoint_data[modelname]
-        
+        # endpoint = endpoint_data[modelname]
         api_key = st.session_state.api_key
-        base_url = endpoint
+        base_url = st.session_state.base_url
+        # base_url = endpoint
         client = OpenAI(api_key=api_key, base_url=base_url)
 
         # Extract the model name
