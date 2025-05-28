@@ -25,7 +25,7 @@ with st.sidebar:
 
     # Create the selectbox without the `index` parameter
     modelname = st.selectbox(
-        "Select an LLM model (Running on Intel® Gaudi®). Hosted on Denvr Dataworks.",
+        "Select an LLM model (running on Intel® Gaudi®). Hosted on Denvr Dataworks.",
         model_names,
         key="selected_model",  # This ties the widget to st.session_state["selected_model"]
     )
