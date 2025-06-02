@@ -34,15 +34,15 @@ This application provides a user-friendly interface to interact with various LLM
 ### Setup
 
 1. Clone the repository:
-   ```bash
-git clone https://github.com/opea-project/Enterprise-Inference/
-cd examples/chatapp
-   ```
+```bash
+git clone https://huggingface.co/spaces/Intel/intel-ai-enterprise-inference
+cd intel-ai-enterprise-inference
+```
 
 2. Install the required packages:
-   ```bash
+```bash
 pip install -r requirements.txt
-   ```
+```
 
 ## Configuration
 
@@ -56,9 +56,9 @@ This application requires API credentials to be set up in Streamlit's secrets ma
 
 2. For local development:
    - Create a `.streamlit/secrets.toml` file with:
-     ```toml
+```toml
 openai_apikey = "your-api-key-here"
-     ```
+```
    - Set the `base_url` environment variable to point to your model endpoint with hosted models.
 
 ## Running the Application
@@ -72,7 +72,7 @@ https://huggingface.co/spaces/Intel/intel-ai-enterprise-inference.
 
 Run the Streamlit application locally:
 
-```
+```bash
 streamlit run app.py
 ```
 
