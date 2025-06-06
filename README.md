@@ -4,34 +4,23 @@ emoji: 📚
 colorFrom: yellow
 colorTo: purple
 sdk: streamlit
-sdk_version: 1.42.2
+sdk_version: 1.45.1
 app_file: app.py
 pinned: false
 license: apache-2.0
 short_description: 'LLM Chatbot on Denvr Dataworks and Intel Gaudi'
 ---
 
-# LLM Chat App
+# LLM Chatbot
+Similar to ChatGPT, this application provides a user-friendly Streamlit interface to interact with various LLM models hosted on Denvr Dataworks, powered by Intel Gaudi accelerators. The chatbot supports streaming responses and offers a selection of different language models, including Llama, DeepSeek, and Qwen models. Try it yourself with the models available in the left drop-down menu. 
 
-This application provides a user-friendly interface to interact with various LLM models hosted on Denvr Dataworks, powered by Intel Gaudi accelerators. The chatbot supports streaming responses and offers a selection of different language models, including Llama models and DeepSeek models.
+[![llmchatbot](images/llmchatbot.png)](https://huggingface.co/spaces/Intel/intel-ai-enterprise-inference)
 
-## Features
+## Setup
 
-- **Model Selection**: Choose from multiple LLM models hosted on Intel Gaudi hardware
-- **Chat Interface**: Clean and intuitive Streamlit chat UI
-- **Streaming Responses**: Real-time streaming of AI-generated responses, including formatted code blocks if requested
-- **Conversation History**: Maintain context throughout your conversation
-- **New Chat**: Option to start a fresh conversation at any time
+If you want to hose the application locally with Streamlit, you can follow the steps below. If you want to host the application on Hugging Face Spaces, the easiest way is to duplicate the space as per the screenshot, and set up your own API secrets as detailed below. Just like any GitHub repository, you can use the same Git actions with the Hugging Face Space to clone, add, push, and commit your changes.
 
-## Installation
-
-### Prerequisites
-
-- Python 3.7+
-- Streamlit
-- OpenAI-compatible API key and endpoint
-
-### Setup
+[![hf_dup](images/hf_dup.png)](https://huggingface.co/spaces/Intel/intel-ai-enterprise-inference)
 
 1. Clone the repository:
 ```bash
@@ -44,60 +33,27 @@ cd intel-ai-enterprise-inference
 pip install -r requirements.txt
 ```
 
-## Configuration
-
 ### Secrets Management
 
-This application requires API credentials to be set up in Streamlit's secrets management:
+This application requires API credentials to be set up in Streamlit's secrets management. You need an OpenAI-compatible API key. In the case of this application, it is using an API key from [Denvr Dataworks](https://www.denvrdata.com/intel).
 
 1. On Hugging Face Spaces:
-   - Add your OpenAI-compatible API key under "Secrets" in the HF settings
-   - Add the base URL for your model endpoint under "Variables" as `base_url`
+- Add your OpenAI-compatible API key under "Secrets" in the HF settings as `openai_apikey`
+- Add the base URL for your model endpoint under "Variables" as `base_url`
 
-2. For local development:
-   - Create a `.streamlit/secrets.toml` file with:
+2. For local development, create a `.streamlit/secrets.toml` file with:
 ```toml
 openai_apikey = "your-api-key-here"
 ```
-   - Set the `base_url` environment variable to point to your model endpoint with hosted models.
-
-## Running the Application
-
-### On Hugging Face Spaces
-
-You can create a new Hugging Face Space [here](https://huggingface.co/new-space), and then use git operations to clone, commit, and push your code changes directly to your Space. Here is the live link to the Space that you can replicate: 
-https://huggingface.co/spaces/Intel/intel-ai-enterprise-inference. 
-
-### Local Development
-
+Set the `base_url` environment variable to point to your OpenAI-compliant model endpoint with hosted models.
+```bash
+export base_url="https://api.inference.denvrdata.com/v1/"
+```
 Run the Streamlit application locally:
 
 ```bash
 streamlit run app.py
 ```
-
-
-## Using the Chatbot
-
-1. Select your desired LLM model from the dropdown menu
-2. Type your message in the chat input field
-3. View the AI's response as it streams in real-time
-4. Continue the conversation or start a new chat using the "Start New Chat" button
-
-## Getting API Access
-
-To use this application, you need an OpenAI-compatible API key from Denvr Dataworks:
-
-1. Visit [Denvr Dataworks](https://www.denvrdata.com/intel) to check the latest available models
-2. Sign up for API access to receive your API key
-3. Configure the key in your Streamlit secrets
-
-## Troubleshooting
-
-- **API Key Issues**: Ensure your API key is correctly set in the Streamlit secrets
-- **Model Unavailability**: If a model is not responding, try selecting a different model
-- **Error Messages**: Check the error output for specific API or connection issues
-- **Rate Limiting**: You might encounter rate limits depending on your API plan
 
 ## Community and Support
 
