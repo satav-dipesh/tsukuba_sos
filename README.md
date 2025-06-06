@@ -55,9 +55,14 @@ Run the Streamlit application locally:
 streamlit run app.py
 ```
 
-## Community and Support
+## Follow Up
 
-Join other AI developers on [Intel's DevHub Discord server](https://discord.gg/kfJ3NKEw5t) for discussions, support, and updates.
+Connect to LLMs on Intel® Gaudi® accelerators with just an endpoint and an OpenAI-compatible API key, courtesy of cloud-provider Denvr Dataworks: https://www.denvrdata.com/intel
+
+Chat with 6K+ fellow developers on the Intel DevHub Discord: https://discord.gg/kfJ3NKEw5t
+
+Connect with me on LinkedIn: https://linkedin.com/in/bconsolvo
+
 
 ## License
 
