@@ -2,6 +2,10 @@ import streamlit as st
 import os
 from openai import OpenAI
 import json
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def clear_chat():
     st.session_state.messages = []
@@ -9,10 +13,10 @@ def clear_chat():
 def initialize_provider_settings(provider_choice):
     """Configure API settings based on provider selection"""
     provider_configs = {
-        "Denvr Dataworks": {
-            "api_key_source": st.secrets.get("openai_apikey", ""),
-            "base_url_source": os.environ.get("base_url", ""),
-            "fallback_model": "meta-llama/Llama-3.3-70B-Instruct"
+        "Hugging Face": {
+            "api_key_source": os.environ.get("HUGGINGFACE_API_KEY", ""),
+            "base_url_source": "https://router.huggingface.co/v1/",
+            "fallback_model": "meta-llama/Llama-3.2-3B-Instruct"
         },
         "IBM": {
             "api_key_source": os.environ.get("ibm_openai_apikey", ""),
@@ -23,12 +27,12 @@ def initialize_provider_settings(provider_choice):
     
     return provider_configs.get(provider_choice, {})
 
-st.title("Intel® AI for Enterprise Inference")
+st.title("Tsukuba SOS")
 st.header("LLM chatbot")
 
 with st.sidebar:
     # Provider selection dropdown
-    available_providers = ["Denvr Dataworks", "IBM"]
+    available_providers = ["Hugging Face", "IBM"]
     
     if "current_provider_choice" not in st.session_state:
         st.session_state.current_provider_choice = available_providers[0]
@@ -87,14 +91,16 @@ with st.sidebar:
     st.markdown("---")
     
     # Display provider-specific information
-    if provider_selection == "Denvr Dataworks":
+    if provider_selection == "Hugging Face":
         st.markdown(
             """
-            **Denvr Dataworks Integration**
+            **Hugging Face Integration**
             
-            Visit [Denvr Dataworks](https://www.denvrdata.com/intel) for model information and API access.
+            Using models from [Hugging Face](https://huggingface.co/) for testing.
             
-            Join the community: [Intel's DevHub Discord](https://discord.gg/kfJ3NKEw5t)
+            Get your API token at: [HF Settings](https://huggingface.co/settings/tokens)
+            
+            Set environment variable: `HUGGINGFACE_API_KEY`
             """
         )
     elif provider_selection == "IBM":
